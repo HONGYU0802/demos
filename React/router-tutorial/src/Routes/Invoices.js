@@ -13,7 +13,7 @@ export default function Invoices() {
   let [searchParams, setSearchParams] = useSearchParams();
   let out = useOutlet()
   const [count, setCount] = React.useState(0);
-  console.log('count=',count)
+//   console.log('count=',count)
   return (
     <div style={{ display: "flex" }}>
       <nav
@@ -51,6 +51,7 @@ export default function Invoices() {
                 }}
                 to={`/invoices/${invoice.number}`}
                 key={invoice.number}
+                state={{aa: '111'}}
                 >
                 {invoice.name}
             </QueryNavLink>
