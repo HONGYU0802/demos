@@ -9,6 +9,8 @@ import Invoices from "./Routes/Invoices";
 import Expenses from './Routes/Expenses';
 import Invoice from './Routes/invoice'
 
+// console.log(<Route/>)
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

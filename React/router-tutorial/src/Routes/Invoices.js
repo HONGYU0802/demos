@@ -1,5 +1,7 @@
-import { NavLink , Outlet, useSearchParams, useLocation} from "react-router-dom";
+import { NavLink , Outlet, useSearchParams, useLocation,useOutlet} from "react-router-dom";
 import { getInvoices } from "../data";
+import React from 'react';
+
 
 function QueryNavLink({ to, ...props }) {
     let location = useLocation();
@@ -9,8 +11,9 @@ function QueryNavLink({ to, ...props }) {
 export default function Invoices() {
   let invoices = getInvoices();
   let [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams)
-
+  let out = useOutlet()
+  const [count, setCount] = React.useState(0);
+  console.log('count=',count)
   return (
     <div style={{ display: "flex" }}>
       <nav
@@ -53,7 +56,7 @@ export default function Invoices() {
             </QueryNavLink>
         ))}
       </nav>
-      <Outlet />
+      <Outlet context={[count, setCount]} />
     </div>
   );
 }

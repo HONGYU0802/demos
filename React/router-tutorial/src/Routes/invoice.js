@@ -1,10 +1,14 @@
-import { useParams ,useNavigate, useLocation,} from "react-router-dom";
+import { useParams ,useNavigate, useLocation, useInRouterContext, useNavigationType, useOutlet,useOutletContext} from "react-router-dom";
 import { getInvoice, deleteInvoice } from "../data";
 
 export default function Invoice() {
     let navigate = useNavigate();
     let location = useLocation();
     let params = useParams();
+    let show = useInRouterContext()
+    let type = useNavigationType()
+    const [count, setCount] = useOutletContext();
+    console.log('recieve count=',count)
     let invoice = getInvoice(parseInt(params.invoiceId, 10));
     return (<main style={{ padding: "1rem" }}>
         <h2>Total Due: {invoice.amount}</h2>
