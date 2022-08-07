@@ -1,0 +1,25 @@
+{
+  "type": "Topology",
+  "arcs": [
+    [
+      [34, 75],
+      [41, -66],
+      [-75, -9],
+      [34, 75]
+    ]
+  ],
+  "transform": {
+    "scale": [0.01650982666666664, 0.010949110091743102],
+    "translate": [108.254334, 33.961273]
+  },
+  "objects": {
+    "map1": {
+      "type": "GeometryCollection",
+      "geometries": [{ "arcs": [[0]], "type": "Polygon" }]
+    },
+    "map2": {
+      "type": "GeometryCollection",
+      "geometries": [{ "type": "Point", "coordinates": [47, 109] }]
+    }
+  }
+}
