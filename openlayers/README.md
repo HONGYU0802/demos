@@ -1,6 +1,13 @@
 # OpenLayers 使用
 
-[OpenLayers](https://openlayers.org) 开源、比较完备，官网200多个例子，学习曲线比较平缓
+[OpenLayers](https://openlayers.org) 开源、不提供地图服务 仅建设了一套引擎、功能比较完备，官网200多个例子，学习曲线
+比较平缓
+
+使用H5的Canvas和WebGL进行渲染，WebGL的比重会逐渐增加。
+
+WebGL在渲染大量数据（>10k）效率明显优于Canvas或SVG，所以对于有大数据量前端渲染需求的，WebGL作为渲染引擎几乎是唯一的选择。
+
+服务器端渲染比WebGL性能高，但是服务器与客户端是1对多的关系，每个客户端都需要服务器渲染，并发量高了，服务器会垮。切片也不能解决，因为样式随时会变，缓存了切片，样式一变，又要重新切。
 
 ## 地图的基本概念
 
@@ -20,9 +27,13 @@ Xian1980坐标系：IAG75椭球体（EPSG:4610）
 
 **参地坐标系：** 以地球质心为原点建立的空间直角坐标系
 
-WGS84坐标系：全球统一使用，WGS84椭球体（EPSG:4326）
+WGS84坐标系（World Geodetic System 1984）：全球统一使用，WGS84椭球体，多用于 GPS（EPSG:4326）
 
-CGCS2000坐标系：CGCS2000椭球体和WGS84椭球极为相似，偏差仅有0.11mm，完全可以兼容使用（EPSG:4510）
+```
+122.25052179,43.65798008
+```
+
+CGCS2000坐标系（China Geodetic Coordinate System 2000）：CGCS2000椭球体和WGS84椭球极为相似，偏差仅有0.11mm，完全可以兼容使用（EPSG:4510）
 
 #### 投影坐标系 Projected coordinate systems
 
@@ -30,7 +41,11 @@ CGCS2000坐标系：CGCS2000椭球体和WGS84椭球极为相似，偏差仅有0.
 
 高斯克吕格投影（Gauss Kruger）（EPSG:4510/4528）
 
-横轴墨卡托投影（Universal Transverse Mercator, UTM）（EPSG:3857）
+横轴墨卡托投影（Universal Transverse Mercator, UTM），共60个区，需要锁定UTM区号，区号决定平面坐标的原点（EPSG:3857）
+
+```
+4393644.965 13857298.963 （UTM区号锁定为中国50）
+```
 
 **圆锥投影**
 
@@ -52,9 +67,9 @@ Geographic Information System，用于采集、存储、处理、分析、检索
 
 地理空间分析的三大基本要素:
 
-1. 空间位置数据描述地理对象所在的位置，如经纬度坐标
-2. 属性数据有是描述特定地理要素特征的定量指标，如公路的等级、宽度、起点、终点等
-3. 时域特征数据是记录地理数据采集或地理现象发生的时刻或时段，对环境模拟分析非常重要
+1. 空间位置数据，描述地理对象所在的位置，如经纬度坐标
+2. 属性数据，描述特定地理要素特征的定量指标，如公路的等级、宽度、起点、终点等
+3. 时域特征数据。是记录地理数据采集或地理现象发生的时刻或时段，对环境模拟分析非常重要
 
 地理信息只是一堆数字纪录，需要有合适的软件去把它表示出来。由于将数据的存储与数据的表达进行分离，因此基于相同的基础数据能够产生出各种不同的产品。
 
@@ -70,7 +85,7 @@ Geographic Information System，用于采集、存储、处理、分析、检索
 
 ##### 栅格瓦片地图
 
-栅格数据就数据结构相对简单，其背后是一门遥感科学与技术（以摄影方式或以非摄影方式获得被探测目标的图像或数据的技术，遥感卫星）
+栅格数据就数据结构相对简单，其背后是遥感科学与技术（以摄影方式或以非摄影方式获得被探测目标的图像或数据的技术，遥感卫星）
 
 图片像是瓦片一样堆叠起来成为地图，当高度处于不同的数值时采用不同的一套瓦片，世界的瓦片图片 -> 国家 -> 省份 -> 城市 -> 小区，在某个高度范围内是采用放大瓦片图片的方式模拟视野的下降。栅格瓦片以 256 256 或 512 512 大小的图片为介质，这种技术通常是在服务端预先将图片渲染好，前端根据地图的缩放等级，按需加载图片加以拼接。
 
@@ -109,7 +124,8 @@ KML 标记语言（Keyhole Markup Language），基于 XML 语法与格式的、
 
 MapGIS 其数据文件主要包括工程文件和工程内各工作区的文件。
 
-## GeoJSON
+## GeoJSON[^1]
+[^1]:[GeoJSON 详细文档](https://www.rfc-editor.org/rfc/rfc7946.html#ref-GJ2008)
 
 GeoJSON.IO for VSCode 插件可以在 vscode 中实时查看绘制出的JSON数据。
 
@@ -118,7 +134,7 @@ GeoJSON.IO for VSCode 插件可以在 vscode 中实时查看绘制出的JSON数�
 ```JSON
 {
     "type": "FeatureCollection",
-    "crs": { // 指明使用的坐标系
+    "crs": { // 指明使用的坐标系，最好使用 WGS84，其他的可能有协同问题[GL2008]
         "type": "name",
         "properties": {
             "name": "urn: ogc: def: crs: EPSG: 54031"
@@ -158,12 +174,7 @@ MultiPolygon 类型下一个面里包含了另一个面会做重叠处理
 
 ## openLayers API
 
-map
-layer
-view
-vector
-tile
-feature
+**核心对象**
 
 ![层级关系](openLayers.png)
 
@@ -179,14 +190,101 @@ feature
    >> Map只有一个可视区域(View)
 ```
 
+map 顶级地图对象
+
+```
+ol/Map
+new Map({interactions,layers,target,view})
+
+getAllLayers()
+getLayers()
+setLayers(layers)
+
+getInteractions()
+removeInteraction(interaction)
+
+getProperties()
+setProperties(values, opt_silent)
+
+getView()
+setView(view)
+
+render()
+renderSync()
+```
+
+view 可视区
+
+```
+ol/View
+new View({center,maxZoom,minZoom,zoom,projection,rotation,padding})
+
+getCenter()
+setCenter(center)
+
+getZoom()
+setZoom(zoom)
+```
+
+layer 图层：image layer 图片图层、tile layer 瓦片图层（栅格只有tile图层）、vector layer 矢量图层（vector 矢量图、tile 瓦片/切片、vector tile 矢量瓦片）
+
+```
+ol/layer/Base 抽象类，只用来创建子类，不能被实例化
+new BaseLayer({opacity,visible,zIndex,properties})
+setProperties(values, opt_silent) 设置属性-值对
+
+ol/layer/Layer 基本的图层类，所有 layer 都派生自它
+new Layer({opacity,visible,zIndex,properties,source,render})
+setSource(source)
+getSource()
+
+ol/layer/Vector 客户端渲染的
+new VectorLayer({opacity,visible,zIndex,properties,source,renderOrder,style})
+getStyle()
+setStyle(opt_style)
+
+ol/layer/Tile 图层源是被预渲染的，切片图片被网格化组织在一起
+new TileLayer({opacity,visible,zIndex,properties,preload})
+```
+
+```
+ol/source/Vector 为矢量图层提供数据源
+new VectorSource({features,format,loader,url})
+getFeatures()
+getFormat()
+getAttributions()
+getProperties()
+```
+
+feature 特征
+
+```
+new Feature(opt_geometryOrProperties:Geometry)
+getStyle()
+setStyle(opt_style)
+getProperties()
+setProperties(values, opt_silent)
+getGeometry()
+setGeometry(geometry)
+```
+
+style 特征样式
+
+```
+ol/style/Style 所有的矢量特征使用的样式
+setStroke(stroke)
+setImage(image)
+setText(text)
+```
+
 **支持的 GIS 数据格式**
 
 ```
 ol/format/GeoJSON 支持读写 GeoJSON 格式的数据
 new GeoJSON()
-readFeatures(source) 将数据库中保存的 GeoJSON 格式的数据读取为 features
+geoJson.readFeatures(source) 将数据库中保存的 GeoJSON 格式的数据读取为 features
 layer.getSource().getFeatures()
-writeFeatures(features) 将绘制的 features 转换成 GeoJSON 格式的数据
+geoJson.writeFeatures(features) 将绘制的 features 转换成 GeoJSON 格式的数据
 
 ol/source/Vector 为 vector layers 提供数据源
 new VectorSource({wrapX: false,features: featuresData}) 将读取出来的 features 赋值过来
@@ -206,7 +304,7 @@ transform(userLocation,'EPSG:4326','EPSG:3857') 将全球统一的WGS84地理坐
 
 **为地图添加一个固定底图层**
 
-内置地图 ol/source/OSM（OpenStreetMap）不能在实际开发中使用
+内置地图 ol/source/OSM（OpenStreetMap）依据开放许可协议全世界的人自由编辑地图，地图界的维基百科，不能在实际开发中使用
 
 openLayers 允许自定义加载外部在线的地图（例如 mapBox 地图，mapBox Studio 可以自定义样式）
 
@@ -257,15 +355,61 @@ dblclick singleclick（250ms延迟） movestart moveend loadstart loadend pointe
 判断是否点击在当前已有的 feature 上
 
 ```
-
+ol/Map
+map.forEachFeatureAtPixel(pixel, callback, opt_options){T|undefined} 
 ```
 
-**为地图添加绘制工具**
+**为地图添加交互功能**
+
+在地图对象上添加交互对象
 
 ```
-
+ol/Map
+map.addInteraction(interaction)
+getInteractions(){Interaction~Interaction>}
+removeInteraction(interaction){Interaction|undefined}
 ```
 
+所有交互功能的父类
+
+```
+ol/interaction/Interaction
+interaction.setActive(active: boolean) 设置交互功能是否激活
+```
+
+选中操作
+
+```
+ol/interaction/Select
+new Select(opt_options) 
+getLayer(feature){VectorLayer} 获取选中的矢量图层
+getFeatures(){Collection Feature>} 获取选中的特征集合
+getProperties(){Object.<string, *>} 获取选中的特征属性
+```
+
+绘画操作
+
+```
+ol/interaction/Draw
+new Draw({type: 'Geometry type', source: source}) 将绘制的结果保存到 source
+draw.on(eventType, listener)
+
+ol/interaction/Draw.DrawEvent
+drawstart drawend drawabort
+
+{
+    feature: Feature
+    target: Object
+    type: String
+}
+```
+
+修改操作
+
+```
+ol/interaction/Modify
+new Modify({features: features}) 指定想要更改的 features 或 vector source，两者必须指定一个
+```
 
 ## 其他前端地图可视化框架
 
@@ -282,3 +426,5 @@ dblclick singleclick（250ms延迟） movestart moveend loadstart loadend pointe
 [eCharts](https://echarts.apache.org/zh/index.html)
 
 [hightCharts](https://www.highcharts.com.cn) 收费
+
+ArcGIS 系列是一个完整的地理信息系统平台，搭建的是一套信息生态环境，不开源
