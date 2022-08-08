@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	function P (name){
+		this.name=name;
+		this.deep={value: '1'}
+		this.getGender = function(){
+			console.log('my gender is '+ this.gender)
+		}
+	}
+	// 拓展原型
+	P.prototype.getName = function(){
+			console.log('my name is '+ this.name)
+	}
+	P.prototype.gender = 'female'
+	P.prototype.address = {one: 'jinbaotun'}
+	let p = new P('hongyu')
+	console.log( p )
+	// console.log( P.prototype )
+
+	// 1. 实现 new 操作符
+	// function newFake (Fun,...args){
+	// 	const obj = {}
+	// 	Object.setPrototypeOf(obj, Fun.prototype)
+	// 	obj.prop = 'new prop'
+	// 	let result = Fun.apply(obj,args)
+	// 	return result instanceof Object? result:obj
+	// }
+	// console.log('test=',newFake(P,'test new'))
+
+	// 2. 给对象设置原型
+	// let s = Object.create(P.prototype,{gender:{value: 'male',writable: false,configurable: true, enumerable: true}})
+	// let s = {gender: 'male'}
+	// Object.setPrototypeOf(s,P.prototype)
+
+	// s.name = 'fengquan' //默认都为真
+	// console.log(Object.getOwnPropertyDescriptor(s,'gender'))
+	// s.gender = 'unkown'
+	// delete s.gender
+	// console.log(s)
+	// console.log(s.getGender())
+
+	// 3. 原型继承
+	// function S(gender){ this.gender=gender; this.tele='123'}
+	// let proto = new P('old name') 
+	// S.prototype =  proto // 继承了构造函数内的属性，和构造函数原型上的属性(原型上没有构造函数)
+	// // S.prototype.constructor = S
+	// Object.defineProperty(S.prototype,'constructor',{value:S}) // 构造函数不可枚举
+	// let s = new S('unkown')
+	// console.log(s)
+	// let s1 = new S('unkown1')
+	// console.log(s1)
+	// s.deep.value = '2' //子类共享了父类实例的空间，一个子类实例对父类引用属性修改会影响其他子类
+
+	//4. 构造函数继承
+	// function S(gender){ 
+	// 	P.apply(this)
+	// 	this.gender=gender; this.tele='123'
+	// }
+	// let s = new S('male')
+	// console.log(s) //继承了父类的属性，但是没有继承父类原型上的属性
+
+	//5. 组合式继承
+	// function S(gender){ 
+	// 	P.apply(this,['new name'])
+	// 	this.gender=gender; this.tele='123'
+	// }
+	// S.prototype = new P('new name') //父类调用了2次，且原型和对象上属性重复
+	// let s = new S('male')
+	// console.log(s)
+
+	//6. 寄生式组合继承
+	// function S(gender){ 
+	// 	P.apply(this,['new name'])
+	// 	this.gender=gender; this.tele='123'
+	// }
+	// // S.prototype = P.prototype // 不要直接引用，生成新的对象
+	// S.prototype = Object.create(P.prototype ) //这样子类有自己原型对象
+	// Object.defineProperty(S.prototype,'constructor',{value:S})
+	// S.prototype.son = {deep:'son prop'}
+	// let s = new S('male')
+	// s.name='self'
+	// // s.son.deep = 'new son'
+	// let s1 = new S('male1')
+	// console.log(s)
+	// console.log(s1)
+
+
+	//7. class
+	// class A {
+	// 	#privateVal;
+	// 	constructor(x,y){
+	// 		this.x = x
+	// 		this.y = y
+	// 		this.#privateVal=100
+	// 	}
+	// 	pname = 'class pname';
+	// 	static sname = 'class sname';
+	// 	m(){
+	// 		// this.#pname = 'class pname'
+	// 		console.log('private=', this.#privateVal)
+	// 		return 'true'
+	// 	}
+	// }
+	// A.prototype.shape = 'rectangle'
+	// let a = new A(1,2)
+	// console.log(a.m())
+
+	// class B extends A {
+	// 	constructor(){
+	// 		super(3,3) 
+	// 		this.color = 'red'
+	// 	}
+	// 	gender = 'male'
+	// }
+	// B.prototype.shape = 'square'
+	// console.log(new B())
+
+
+</script>
+</html>

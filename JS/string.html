@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+
+
+
+
+
+
+	//字符串反转
+	// let s='12345678'
+	// let reverse = ''
+	// for(let i=s.length-1;i>=0;i--){
+	// 	reverse += s.charAt(i)
+	// }
+	// console.log(reverse)
+
+
+
+
+	// 数字转换成人民币	12,345,678
+	// let number = 12345678
+	// let s = [...String(number)].reverse().join('')
+	// // console.log(s)
+	// let res=''
+	// for(let i=0;i<s.length;i++){
+	// 	if(i%3===0 && i!==s.length && i !==0) res += ','
+	// 	res += s.charAt(i)
+	// }
+	// console.log([...res].reverse().join(''))
+
+
+
+
+
+	
+	// let s = 'get-element-by-id'
+	// let arr = s.split('-')
+	// for(let i=0;i<arr.length;i++){
+	// 	// 方法一
+	// 	arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1) //slice(1)
+
+	// 	// 方法二
+	// 	// arr[i] = arr[i].replace(/(^\w{1})/, (match,p1,offset,string)=>{ return p1.toUpperCase() })
+
+	// 	// 方法三
+	// 	// arr[i] = arr[i].replace(/^\w{1}/, arr[i].charAt(0).toUpperCase())
+	// }
+	// console.log(arr.join(''))
+
+
+	// let url = 'http://item.taobao.com/item.html?a=1&b=2&c=3&d'
+	// let arr = url.split('?')[1].split('&')
+	// let res = {}
+	// for(let item of arr){
+	// 	let param = item.split('=')
+	// 	res[param[0]] = param[1]
+	// }
+	// console.log(res)
+
+	// 查找出现最多字符
+	// let s = 'aassffhhhkkkrsdgggasdfss'
+	// console.log(s.length)
+	// let map = new Map()
+	// for(let i=0;i<s.length;i++){
+	// 	let char = s.charAt(i)
+	// 	if(map.has(char)){
+	// 		map.set(char, map.get(char)+1)
+	// 	}else{
+	// 		map.set(char, 1)
+	// 	}
+	// }
+	// let max = 0
+	// map.forEach((value,index)=>{
+	// 	max = Math.max(max,value)
+	// })
+
+	// console.log(max)
+
+
+
+</script>
+</html>

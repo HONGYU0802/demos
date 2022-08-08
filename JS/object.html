@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+
+<script type="text/javascript">
+
+
+	let name = 'hongyu'
+	let age = '28'
+	let template = 'my name is ${name}}my and ${age} years old'
+
+	let res = template.replace(/\$\{([^}]*)\}/g, function(match,p1){
+	  // arguments[1] // 每次被匹配到的内部字符
+	  // console.log('here=',match)
+	  // console.log('p1=',p1)
+	  return eval(arguments[1])
+	})
+	console.log(res)
+
+
+	// function test(){
+	// 	console.log(this.a)
+	// }
+	// let o = {a:'12'}
+	// let bindt = test.bind(o)
+	// console.log(bindt.name)
+
+
+
+	// console.log(isNaN(123))
+
+
+	// b='2';
+	// (function a(){
+	// 	aa='1'
+	// 	window.test = 'ttt'
+	// 	console.log(window.aa,aa)
+	// })()
+
+	// console.log(window.test,aa)
+
+
+
+	// let obj = {e:'34',g:'12',h:'67',j:'90'}
+	// console.log('e' in obj)
+
+
+	// let foo = {q:'bar'}
+	// let obj = {foo}
+	// let [a,...arr] = [1,2,3]
+	// let {g,...d} = {e:'34',g:'12',h:'67',j:'90'}
+	// let p,q
+	// ({p=5,q:m=6} = foo)
+	// m=7
+	// let {['n'+'m']:u} = {nm: '999'}
+	// let s = '99999'
+	// let {length} = '88888888'
+	// console.log(length)
+
+	// const foo = { 'fizz-buzz': true };
+	// ({ 'fizz-buzz': fizzBuzz } = foo);
+	// console.log(fizzBuzz); // true
+
+
+	// 数组去重
+	// let arr = [1,2,3,4,3,2,3,4,6,7,6]
+	// let res = arr.filter((value,index,arr)=>{
+	// 	return arr.indexOf(value) === index
+	// })
+	// console.log(res)
+
+	
+
+// 深拷贝
+// function clone(obj){
+//   let newObj = null
+//   if(typeof obj!== 'object' || obj === null) {
+//   	console.log(obj)
+//     newObj=obj
+//   }else{
+//     newObj=Array.isArray(obj)?[]:{}
+//     for(let prop in obj){
+//     	newObj[prop] = clone(obj[prop])
+//     }
+//   }
+//   return newObj
+// }
+
+// let a = {a:'1',b:{c:'2',d:'3',f: ()=>{console.log('happy')}}}
+// let b = clone(a)
+// let c = JSON.parse(JSON.stringify(a))
+// a.b.d=6
+// console.log(a)
+// console.log(b.b.f())
+// console.log(c)
+
+</script>
+</html>

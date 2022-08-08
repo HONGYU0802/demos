@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<article>
+
+	  <div>This `div` is first!</div>
+
+	  <div>This <span>nested `span` is first</span>!</div>
+	  <div>This <em>nested `em` is first</em>, but this <em>nested `em` is last</em>!</div>
+	  <div>This <span>nested `span` gets styled</span>!</div>
+	  <span>This<em>aaa</em> `b` qualifies!</span>
+	  <span>This<em>aaa</em> `b` qualifies!</span>
+	  <p>This<em>aaa</em> `b` qualifies!</p>
+	  <p>This<span>bbb</span> `b` qualifies!</p>
+	  <div>This is the final `div`.</div>
+	</article>
+</body>
+<style type="text/css">
+	em:nth-of-type(2){
+	  background-color: pink;
+	}
+
+</style>
+</html>

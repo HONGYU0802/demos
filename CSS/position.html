@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div class="main clearfix">
+		<div class="d">d</div>
+	<!-- <div class="e">e</div> -->
+		<div class="a">a</div>
+		<div class="b">b</div><p>文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文</p>
+		<!-- <div class="c">c</div> -->
+	</div>
+	<div class="f">f</div>
+</body>
+<style type="text/css">
+	body{
+		width: 100vw;
+		height: 100vh;
+	}
+	.a, .b, .c, .d, .e, .f{
+		background-color: red;
+		width: 100px;
+		height: 100px;
+		margin: 20px;
+		/*display: inline-block;*/
+	}
+	.b{
+		background-color: pink;
+		/*position: sticky;
+		top: 50px;
+		left: 50px;*/
+		float: left;
+	}
+	.clearfix::after{
+		content: '';
+		visibility: hidden;
+		clear: both;
+		height: 0;
+		display: block;
+	}
+	.c{
+		/*clear: both;*/
+	}
+	.main{
+		background: blue;
+		/*height: 70vh;*/
+		width: 90vw;
+	}
+
+</style>
+</html>

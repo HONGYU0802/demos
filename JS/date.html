@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">	
+
+	let date = new Date()
+	console.log(date)
+
+	// YYYY-MM-DD
+	let month = date.getMonth()+1
+	let day = date.getDate()
+	let res = date.getFullYear()+'-'+(month<10?'0'+month:month)+'-'+(day<10?'0'+day:day)
+	console.log(res)
+
+</script>
+</html>

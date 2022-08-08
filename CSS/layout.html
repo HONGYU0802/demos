@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<script type="text/javascript"></script>
+<body>
+<!-- 	<div class="parent">
+		<div class="child"></div>
+	</div>
+	<div class="sibling">
+	</div>
+	<div class="sibling2">
+	</div> -->
+	<header style="background-color: red;">header</header>
+	<main>
+		<div class="m" style="background-color: pink;">
+			<div class="inner">middle</div>
+		<!-- middle -->
+		</div>
+		<div class="l" style="background-color: green;">left</div>
+		<div class="r" style="background-color: yellow;">right</div>
+	</main>
+	<footer style="background-color: blue;">footer</footer>
+</body>
+<style type="text/css">
+* {
+	text-align: center;
+}
+
+header {
+	width: 100%;
+	height: 100px;
+}
+footer {
+	width: 100%;
+	height: 100px;
+}
+main {
+	/*width: 100vw;*/
+	/*display: flex;*/
+	overflow: hidden;
+	/*position: relative;*/
+	/*padding: 0 100px;*/
+}
+main div {
+	height: calc(100vh - 200px - 16px);
+}
+.l{
+	width: 100px;
+	/*order: -1;*/
+	/*flex: none;*/
+	float: left;
+	/*position: relative;*/
+	/*left: -100px;*/
+	/*top: 0;*/
+	margin-left: -100%;
+}
+.r{
+	width: 100px;
+	/*flex: none;*/
+	float: left;
+	/*position: relative;*/
+	/*left: 100px;*/
+	/*top: 0;*/
+	margin-left: -100px;
+}
+.m{
+	width: 100%;
+	/*flex-grow: 1;*/
+	float: left;
+	/*margin-right: -100vw;*/
+	/*box-sizing: border-box;*/
+	/*padding: 0 100px;*/
+	text-align: left;
+
+}
+.inner{
+	margin: 0 100px;
+	/*padding: 0 100px;*/
+	/*box-sizing: border-box;*/
+	text-align: left;
+}
+
+
+	/*6. transform*/
+/*	.parent{
+		background-color: blue;
+		height: 200px;
+		width: 200px;
+	}
+	.child{
+		background-color: red;
+		height: 100px;
+		width: 100px;
+		transform: translate(50%,50%);
+	}*/
+
+/*	5.table-cell
+	.parent{
+		background-color: blue;
+		height: 200px;
+		width: 200px;
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+	}
+	.child{
+		background-color: red;
+		height: 100px;
+		width: 100px;
+		display: inline-block;
+	}
+	.sibling{
+		margin-top: 100px;
+		margin-bottom: 200px;
+	}*/
+
+/*	4. 计算
+	.parent{
+		background-color: blue;
+		height: 200px;
+		width: 200px;
+		float: left;
+	}
+	.child{
+		background-color: red;
+		height: 100px;
+		width: 100px;
+		margin-top: 50px;
+		margin-left: 50px;
+	}*/
+
+/*	3. flex
+	.parent{
+		background-color: blue;
+		height: 200px;
+		width: 200px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.child{
+		background: red;
+		height: 100px;
+		width: 100px;
+	}
+
+*/
+/*	2. margin
+	.parent{
+		background-color: blue;
+		height: 200px;
+		width: 200px;
+	}
+	.child{
+		background: red;
+		height: 100px;
+		width: 100px;
+		margin: auto;
+	}
+*/
+
+/* 1. position */
+/*	.parent{
+		background-color: blue;
+		height: 200px;
+		width: 200px;
+		position: relative;
+	}
+	.sibling{
+		background-color: green;
+		height: 200px;
+		width: 200px;
+		margin-bottom: 50px;
+
+	}
+	.sibling2{
+		background-color: yellow;
+		height: 200px;
+		width: 200px;
+		margin-top: 100px;
+		
+	}
+	.child{
+		background: red;
+		height: 100px;
+		width: 100px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -50px;
+		margin-left: -50px; 
+	}*/
+	
+</style>
+</html>

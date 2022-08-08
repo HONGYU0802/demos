@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>layout</title>
+</head>
+<body>
+	<header>header</header>
+	<main>
+		<div class="middle">middle</div>
+		<div class='left'>left</div>
+		<div class='right'>right</div>
+	</main>
+	<footer>footer</footer>
+</body>
+<style type="text/css">
+	header {
+		background-color: blue;
+	}
+	footer {
+		background-color: blue;
+	}
+	main {
+		overflow: hidden;
+	}
+	.middle {
+		background-color: pink;
+		float: left;
+		width: 100%;
+		margin-right: -100%;
+		box-sizing: border-box;
+		padding: 0 100px;
+	}
+	.left {
+		background-color: yellow;
+		width: 100px;
+		float: left;
+	}
+	.right {
+		background-color: yellow;
+		width: 100px;
+		float: right;
+	}
+</style>
+</html>

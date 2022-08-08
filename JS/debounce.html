@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<!-- oninput="search(this,event)" -->
+	<input type="text" name="content"> 
+</body>
+<script type="text/javascript">
+
+
+
+	// 3. 节流
+	document.body.addEventListener('mousemove',throttle(function search(e){
+		console.log('execute search')
+		console.log(e)
+		console.log(this)
+	},1000))
+
+	function throttle(cb,interval){
+		let timestamp = new Date()
+		return function (e){
+			let now = new Date()
+			// console.log(timestamp.getTime()+interval )
+			if(timestamp.getTime()+interval < now.getTime()){
+				timestamp = now
+				cb.call(this,e)
+			} 
+
+		}
+	}
+	// function search(e){
+	// 	console.log('execute search')
+	// 	console.log(e)
+	// 	console.log(this)
+	// }
+
+
+
+	// 2. 事件句柄绑定
+	// let inputElements = document.getElementsByTagName('input')
+	// inputElements[0].oninput = search // 自动传参 event
+
+
+	// 1. 防抖
+	// let inputElements = document.getElementsByTagName('input')
+	// console.log(inputElements)
+	// inputElements[0].addEventListener('input',debounce(search,1000))
+	// function debounce(cb,delay){
+	// 	console.log('execute debounce')
+	// 	let timer = null
+	// 	return function (e){
+	// 		console.log('execute cb')
+	// 		if(timer) clearTimeout(timer)
+	// 		timer = setTimeout(cb.bind(this,e),delay)
+	// 	}
+	// }
+	// function search(t,e){
+	// 	console.log('execute search')
+	// 	// console.log(inputElements[0].value)
+	// 	console.log(e)
+	// 	console.log(t.value)
+	// }
+	
+</script>
+</html>
